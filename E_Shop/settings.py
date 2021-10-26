@@ -127,21 +127,21 @@ STATIC_ROOT=os.path.join(BASE_DIR, 'staticfiles')
 
 STATIC_URL = '/static/'
 
+MEDIA_URL= '/images/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "uoloads"),
-    os.path.join(BASE_DIR, "products/static/products")
+    os.path.join(BASE_DIR, "static")
     
 ]
 
 #MEDIA_ROOT= BASE_DIR/ 'uploads'
 
-MEDIA_ROOT=os.path.join(BASE_DIR, 'uploads')
+MEDIA_ROOT=os.path.join(BASE_DIR, 'static/images')
 
 
 
 #MEDIA_URL= '/files/'
-MEDIA_URL= '/uploads/'
+
 
 
 # Default primary key field type
