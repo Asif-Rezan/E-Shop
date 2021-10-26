@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-11ia$tjqnkcpacg+c@l^5@2bq0z!=c%8%udr4q+0$dp!(2*%ao
 DEBUG = False
 
 ALLOWED_HOSTS = ['eshopingbd.herokuapp.com','127.0.0.1']
-
+#ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -128,7 +128,7 @@ STATIC_URL = '/static/'
 
 #MEDIA_ROOT= BASE_DIR/ 'uploads'
 
-MEDIA_ROOT=os.path.join(BASE_DIR, '/uploads')
+MEDIA_ROOT=os.path.join(BASE_DIR, 'products/static/products')
 
 MEDIA_URL= '/files/'
 
