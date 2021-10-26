@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cart</title>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+
+    <div class="mt-5"></div>
+
+    {% for cartProduct in cartItem %} {% if cartProduct.user == request.user%}
+
+    <div class="cart mx-5 p-5 shadow-sm">
+      <div class="row">
+        <div class="col-1">
+          <img
+            class="img-fluid"
+            src="{{cartProduct.products.productImage.url}}"
+            alt="{{cartProduct.products.productName}}"
+          />
+        </div>
+        <div class="col-5"><h5>{{cartProduct.products.productName}}</h5></div>
+        <div class="col-2"><p>৳{{cartProduct.products.productPrice}}</p></div>
+        <div class="col-2">
+          <button
+            class="btn btn-success"
+            onclick=window.location.href="{% url 'payment-page' %}?id={{cartProduct.products.id}}"
+          >
+            Order
+          </button>
+        </div>
+
+        <div class="col-2">
+          <a href="{% url 'remove-cart' %}?id={{cartProduct.id}}">
+            <i class="fas fa-trash-alt fa-2x text-danger"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <br />
+
+    {% endif %} {% endfor %}
+  </body>
+</html>

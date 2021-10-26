@@ -1,0 +1,38 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'products/styles/style.css' %}">
+    <title>Login</title>
+  </head>
+  <body>
+  {% include 'navbar.html' %}
+
+
+<div class="login-form-container">
+  <div class='text-center login-form-div'>
+  <h2>Login</h2>
+    <form action="" method="POST">
+      {% csrf_token %}
+      <input class="form-control my-3" placeholder="Enter username" name="username" type="text" />
+      <input class="form-control my-3" placeholder="Enter password" name="password" type="password" />
+      <input class='form-control btn btn-success mb-2' type="submit" value="Login" />
+    </form>
+
+        {% if messages %}
+    <ul class="messages text-danger">
+        {% for message in messages %}
+        <span>{{ message }}</span>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+    <p>Don't have an account <a href="{% url 'register' %}">signup here</a></p>
+   </div>
+</div>
+
+  </body>
+</html>

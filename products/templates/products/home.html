@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'products/styles/home.css' %}" />
+
+    <title>Home</title>
+  </head>
+  <body>
+    {% include 'navbar.html' %}
+    <div class="container">
+
+
+    <div class="row">
+
+    <div class="col-lg-2 mt-5">
+    {% comment %} Button list start {% endcomment %}
+      <div id="item-button-group">
+        
+          <div>
+            <div class="list-group" id="list-tab" role="tablist">
+              <a
+                class="list-group-item list-group-item-action"
+                id="list-home-list"
+                href="{% url 'home' %}"
+                role="tab"
+                aria-controls="list-home"
+                >All</a
+              >
+
+              {% for category in categories %}
+
+              <a
+                class="list-group-item list-group-item-action"
+                id="list-home-list"
+                href="{% url 'home' %}?q={{category.name}}"
+                role="tab"
+                aria-controls="list-home"
+                >{{category.name}}</a
+              >
+
+             
+
+              {% endfor %}
+            </div>
+          </div>
+  
+        </div>
+      </div>
+
+      {% comment %} Button list end {% endcomment %}
+    
+
+
+
+   
+
+    <div class="col-lg-10">
+    {% include 'products/image_slider.html' %}
+    </div>
+
+
+
+
+
+    
+    </div>
+    
+      
+
+      
+
+
+
+
+      <div class="home-container">
+
+      <h1 class="title my-3">{{category_title}}</h1>
+
+        <div class="row text-center">
+          {% for product in products %}
+
+          <div class="col-lg-2 col-sm-1">
+            <div class="card mx-auto">
+              <a href="/details/{{product.id}}" class="card-link">
+                <img
+                  src="{{product.productImage.url}}"
+                  class="card-img-top card-image"
+                  alt="{{product.productName}}"
+                />
+
+                <div class="card-body text-start card-text">
+                  <h6 class="card-title">{{product.productName}}</h6>
+                  <p>৳{{product.productPrice}}</p>
+                </div>
+              </a>
+            </div>
+          </div>
+
+          {% endfor %}
+        </div>
+      </div>
+   
+   
+
+   
+  </body>
+</html>

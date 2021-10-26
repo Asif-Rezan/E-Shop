@@ -1,0 +1,96 @@
+.firstName,.lastName,.email,.phn,.pwd1,.pwd2,.username,.shippingAddress
+  {
+    width: 500px;
+    border-top-style: hidden;
+    border-right-style: hidden;
+    border-left-style: hidden;
+    border-bottom-style: groove;
+    border-bottom: steelblue 1px solid;
+    
+    
+   
+  }
+  a{
+    text-decoration: none !important;
+    color: black !important;
+  }
+  
+  .errorlist
+  {
+    color: red;
+  }
+  :focus {
+    outline: none;
+  }
+
+  .reg-form-div
+  {
+    margin-top: 10%;
+  }
+
+
+  .login-form-div
+  {
+    width: 500px;
+    margin: auto;
+  }
+  .login-form-container
+  {
+    margin-top: 10%;
+  }
+  .search-form-container
+  {
+    width: 50%;
+    
+  }
+
+  .logo-title
+  {
+    font-family: 'Rampart One', cursive;
+    
+  }
+
+  
+
+  .navbar-div
+  {
+     background-color: rgb(174, 236, 174);
+  
+
+  }
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  /* font-family: 'Bebas Neue', cursive;
+font-family: 'Cookie', cursive;
+font-family: 'IM Fell English SC', serif;
+font-family: 'Inconsolata', monospace;
+font-family: 'Indie Flower', cursive;
+font-family: 'Open Sans Condensed', sans-serif;
+font-family: 'Rajdhani', sans-serif;
+font-family: 'Rampart One', cursive;
+font-family: 'Roboto', sans-serif; */
+ 
+ 
+  
