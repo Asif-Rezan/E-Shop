@@ -87,10 +87,12 @@
             <div class="card mx-auto">
               <a href="/details/{{product.id}}" class="card-link">
                 <img
-                  src="{{MEDIA_URL}}uploads/{{product.productImage}}"
+                  src="{{product.productImage.url}}"
                   class="card-img-top card-image"
                   alt="{{product.productName}}"
                 />
+
+                
 
                 <div class="card-body text-start card-text">
                   <h6 class="card-title">{{product.productName}}</h6>
