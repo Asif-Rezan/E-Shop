@@ -4,11 +4,6 @@
 }
 .details-card
 {
-  display: grid;
-  grid-template-columns: 1fr 3fr 1fr;
-  grid-column-gap: 10px;
-
-  padding: 20px;
   background-color: #fff;
 }
 body

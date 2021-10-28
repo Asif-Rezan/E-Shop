@@ -1,6 +1,11 @@
+*{
+  font-family:sans-serif;
+}
+
 .firstName,.lastName,.email,.phn,.pwd1,.pwd2,.username,.shippingAddress
   {
-    width: 500px;
+   
+    width: 100%;
     border-top-style: hidden;
     border-right-style: hidden;
     border-left-style: hidden;
@@ -23,26 +28,34 @@
     outline: none;
   }
 
-  .reg-form-div
-  {
-    margin-top: 10%;
-  }
+  
 
 
-  .login-form-div
-  {
-    width: 500px;
-    margin: auto;
-  }
-  .login-form-container
-  {
-    margin-top: 10%;
-  }
-  .search-form-container
-  {
+  
+ 
+ 
+
+  .search-form-container {
     width: 50%;
-    
   }
+  
+  @media screen and (max-width: 992px) {
+    .search-form-container {
+     width: 50%;
+    }
+  }
+  
+  
+  @media screen and (max-width: 600px) {
+    .search-form-container {
+     width: 100%;
+    }
+  }
+
+
+
+
+
 
   .logo-title
   {
@@ -55,12 +68,24 @@
   .navbar-div
   {
      background-color: rgb(174, 236, 174);
+     
   
 
   }
+
+
+
   
   
 
+  
+
+  
+
+ 
+  
+  
+  
 
 
 
@@ -69,6 +94,7 @@
 
 
 
+  
 
 
 

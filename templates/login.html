@@ -1,38 +1,76 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="{% static 'products/styles/style.css' %}">
-    <title>Login</title>
-  </head>
-  <body>
-  {% include 'navbar.html' %}
+{% include 'navbar.html' %}
 
 
-<div class="login-form-container">
-  <div class='text-center login-form-div'>
-  <h2>Login</h2>
-    <form action="" method="POST">
-      {% csrf_token %}
-      <input class="form-control my-3" placeholder="Enter username" name="username" type="text" />
-      <input class="form-control my-3" placeholder="Enter password" name="password" type="password" />
-      <input class='form-control btn btn-success mb-2' type="submit" value="Login" />
-    </form>
+<div class="container">
+    <div class="row py-5 mt-4 align-items-center">
+       <!-- For Demo Purpose -->
+        <div class="col-md-5 pr-lg-5 mb-5 mb-md-0">
+            <img src="https://bootstrapious.com/i/snippets/sn-registeration/illustration.svg" alt="" class="img-fluid mb-3 d-none d-md-block">
+            <h1>Welcome back</h1>
+            <p class="font-italic text-muted mb-0">Grab the authentic product at low price</p>
+            
+        </div>
 
-        {% if messages %}
-    <ul class="messages text-danger">
-        {% for message in messages %}
-        <span>{{ message }}</span>
-        {% endfor %}
-    </ul>
-    {% endif %}
+        <!-- Registeration Form -->
+        <div class="col-md-7 col-lg-6 ml-auto">
+            <form method="POST">
+            {% csrf_token %}
+                <div class="row">
 
-    <p>Don't have an account <a href="{% url 'register' %}">signup here</a></p>
-   </div>
+                    <!-- First Name -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-user text-muted py-2"></i>
+                            </span>
+                        </div>
+                        <input id="username" type="text" name="username" placeholder="Username" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
+
+                    <!-- Password -->
+                    <div class="input-group col-lg-6 mb-4">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text bg-white px-4 border-md border-right-0">
+                                <i class="fa fa-lock text-muted py-2"></i>
+                            </span>
+                        </div>
+                        <input id="password" type="password" name="password" placeholder="Password" class="form-control bg-white border-left-0 border-md">
+                    </div>
+
+                    
+
+                    <!-- Submit Button -->
+                    <div class="form-group col-lg-12 mx-auto mb-0 text-center">
+                         <button type="submit" class="btn btn-primary btn-block px-5 py-2">
+                           Login
+                        </button>
+                    </div>
+
+                     {% if messages %}
+                    <ul class="messages text-danger">
+                        {% for message in messages %}
+                        <p class="text-center mt-3">{{ message }}</p>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
+
+                    <!-- Divider Text -->
+                    <div class="form-group col-lg-12 mx-auto d-flex align-items-center my-4">
+                        <div class="border-bottom w-100 ml-5"></div>
+                        <span class="px-2 small text-muted font-weight-bold text-muted">OR</span>
+                        <div class="border-bottom w-100 mr-5"></div>
+                    </div>
+
+                    
+
+                    <!-- Already Registered -->
+                    <div class="text-center w-100">
+                        <p class="text-muted font-weight-bold">Don't have an account <a href="{% url 'register' %}" class="text-primary ml-2">Register</a></p>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
-
-  </body>
-</html>

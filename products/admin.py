@@ -6,7 +6,7 @@ from products.models import Cart, Category, UserForm, confirmedOrder, products, 
 # Register your models here.
 class ProductAdmin(admin.ModelAdmin):
   list_display=('productName', 'category')
-  list_per_page=(10)
+  list_per_page=(20)
 
 
 class confirmOrderAdmin(admin.ModelAdmin):

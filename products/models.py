@@ -36,19 +36,19 @@ class products(models.Model):
 
 
 class UserForm(UserCreationForm):
-  first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'firstName','placeholder':'Enter first name'}),label='')
-  last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'lastName', 'placeholder':'Enter last name '}),label='')
-  username=forms.CharField(widget=forms.TextInput(attrs={'class': 'username', 'placeholder':'Enter username'}),label='')
-  email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'email','placeholder':'Enter email'}),label='')
+  first_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'firstName form-control bg-white border-left-0 border-md','placeholder':'Enter first name'}),label='')
+  last_name = forms.CharField(widget=forms.TextInput(attrs={'class': 'lastName form-control bg-white border-left-0 border-md', 'placeholder':'Enter last name '}),label='')
+  username=forms.CharField(widget=forms.TextInput(attrs={'class': 'username form-control bg-white border-left-0 border-md', 'placeholder':'Enter username'}),label='')
+  email = forms.EmailField(widget=forms.TextInput(attrs={'class': 'email form-control bg-white border-left-0 border-md','placeholder':'Enter email'}),label='')
   password1 = forms.CharField(widget=forms.PasswordInput(
         attrs={
-        'class':'pwd2',
+        'class':'pwd2 form-control bg-white border-left-0 border-md',
         'placeholder':'Password'
         }
     ),label='')
   password2 = forms.CharField(widget=forms.PasswordInput(
         attrs={
-        'class':'pwd1',
+        'class':'pwd1 form-control bg-white border-left-0 border-md',
         'placeholder':'Confirm Password '
         }
     ),label='')

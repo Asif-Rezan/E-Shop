@@ -16,9 +16,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cookie&family=IM+Fell+English+SC&family=Inconsolata:wght@200&family=Indie+Flower&family=Open+Sans+Condensed:wght@300&family=Rajdhani:wght@300&family=Rampart+One&family=Roboto:wght@100;300&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="{% static 'products/styles/style.css' %}">
+
+    
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-div shadow-sm px-3 py-3">
+  
+    <nav class="navbar navbar-expand-lg navbar-light navbar-div shadow-sm px-3 py-3">
       <div class="container-fluid">
         <a class="navbar-brand" href="{% url 'home' %}"><h2 class="logo-title">E Shop</h2></a>
         <button
@@ -30,13 +33,13 @@
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span class="navbar-toggler-icon nav-icon"></span>
+          <span class="navbar-toggler-icon nav-icon "></span>
         </button>
 
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
        
-       <div class="m-auto search-form-container">
+       <div class="m-auto search-form-container ">
         <form class="d-flex" action="{% url 'home' %}" method="GET">
             <input
               class="form-control me-2 search-input-field"

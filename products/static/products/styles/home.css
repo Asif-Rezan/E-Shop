@@ -11,11 +11,13 @@ a{
 
 .card
 {
-  width: 200px;
-  height: 250px;
+  width: -webkit-fit-content;
+  height: -webkit-fit-content;
+  width: -moz-fit-content;
+  height: -moz-fit-content;
   padding: 10px;
  
-  overflow: hidden;
+  
 }
 .card-image
 {
@@ -32,6 +34,7 @@ a{
   font-family: 'Open Sans Condensed', sans-serif;
 
 }
+
 
 /* fonts */
 /* font-family: 'Bebas Neue', cursive;
