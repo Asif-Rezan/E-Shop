@@ -22,7 +22,7 @@ class products(models.Model):
   productDescription=models.TextField()
   productPrice=models.FloatField() 
   category=models.ForeignKey(Category,on_delete=models.SET_NULL,null=True)
-  productImage=models.ImageField(upload_to='images',null=True)
+  productImage=models.ImageField(upload_to='',null=True)
   
 
   def __str__(self) -> str:
