@@ -1,14 +1,16 @@
-from django import forms
-from django.http import request
-from django.shortcuts import redirect, render
-from .models import Cart, Category, Comment, UserForm, products
-from django.contrib.auth import authenticate,login, logout
 from django.contrib import messages
-from django.core.paginator import Paginator
-from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
-from .models import *
+from django.http.response import HttpResponseRedirect
+from django.shortcuts import redirect
+from rest_framework.decorators import api_view
+from products.api.serializers import cartSerializer, categorySerializer, commentSerializer, productsSeriliazer, userSeriliazer, userdetailsSerializer
+
+
+from products.models import Cart, Category, Comment, UserForm, confirmedOrder, products, userDetails
+
+from rest_framework.response import Response
+
 
 
 
@@ -21,9 +23,10 @@ from django.db.models import Q
 
 
 
-
+@api_view(['GET'])
 def Home(request):
-  q=request.GET.get('q') if request.GET.get('q')!=None else ''
+  
+  q=request.query_params.get('q') if request.GET.get('q')!=None else ''
 
 
   productItem=products.objects.filter(
@@ -39,25 +42,42 @@ def Home(request):
   
   categories=Category.objects.all()
 
-  paginator = Paginator(productItem, 2)
-  page_number = request.GET.get('page')
-  page_obj = paginator.get_page(page_number)
+  # paginator = Paginator(productItem, 2)
+  # page_number = request.GET.get('page')
+  # page_obj = paginator.get_page(page_number)
 
-  context={'products':productItem, 'categories':categories, 'category_title':category_title,'page_obj': page_obj}
-  return render(request,'products/home.html',context)
- 
+
+  serializer=productsSeriliazer(productItem, many=True)
+  serializer2=categorySerializer(categories, many=True)
+
+
+
+  #context={'products':productItem, 'categories':categories, 'category_title':category_title}
+  return Response({
+        'productItem': serializer.data,
+        'category': serializer2.data,
+        'category_title':category_title,
+    })
+
+
 
 
 
 @login_required(login_url='login')
+@api_view(['GET','POST'])
 def productDetails(request,pk):
   product=products.objects.get(id=pk)
-  
+
+  product_serializer=productsSeriliazer(product,many=False)
+
 
 
   product_comment=product.comment_set.all()
+
+
  
-  
+  comment_serializer=commentSerializer(product_comment, many=True)
+
 
   if request.method=="POST":
       comment=Comment.objects.create(
@@ -67,13 +87,17 @@ def productDetails(request,pk):
     )
 
 
-  context={'product':product,'product_comment':product_comment}
-  return render(request,'products/product_details.html',context)
+  context={'product':product_serializer.data,'product_comment':comment_serializer.data}
+
+  return Response(context)
 
 
 
 
 
+
+
+@api_view(['GET','POST'])
 def register(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -82,13 +106,16 @@ def register(request):
             login(request,user)
 
             return redirect('home')
-    else:
-        form = UserForm()
+    # else:
+    #     form = UserForm()
 
 
-    return render(request, 'registration.html', {'form': form})
+    return Response("Registration successfull")
 
 
+
+
+@api_view(['GET','POST'])
 def loginUser(request):
   if request.user.is_authenticated:
     return redirect('home')
@@ -109,27 +136,29 @@ def loginUser(request):
       login(request,user)
       return redirect ('home')
 
-    # else:
-    #   messages.error(request, 'Username or password does not exist')
 
-    
+ 
+  return Response("Login successfull")
 
 
-  context={}
-  return render(request,'login.html',context)
+
+
+
 
 
 @login_required(login_url='login')
+@api_view(['GET','POST'])
 def DeleteComment(request, pk):
   comment=Comment.objects.get(id=pk)
   comment.delete()
-  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+  return Response("Delete successfull")
 
 
 
 
 
 @login_required(login_url='login')
+@api_view(['GET'])
 def userLogout(request):
   logout(request)
   return redirect('home')
@@ -138,27 +167,23 @@ def userLogout(request):
 
 
 @login_required(login_url='login')
+@api_view(['GET'])
 def paymentPage(request):
 
   productId=request.GET.get('id')
   product=products.objects.get(id=productId)
-  context={'product':product}
+  product_seriliazer=productsSeriliazer()
+  context={'product':product_seriliazer.data}
 
-  return render(request,'products/payment_page.html',context)
+  return Response(context)
 
 
 @login_required(login_url='login')
+@api_view(['GET'])
 def addToCart(request):
   
   productId=request.GET.get('product-id')
   product=products.objects.get(id=productId)
-
-
- 
-  
-
-  # cart=Cart(products=Id, user=request.user)
-  # cart.save(force_insert=True)
 
   cart=Cart.objects.create(
     
@@ -170,22 +195,33 @@ def addToCart(request):
 
 
 
+
+
 @login_required(login_url='login')
+@api_view(['GET'])
 def showCart(request,pk):
 
   user=User.objects.get(id=pk)
   #product=products.objects.get(id=1)
   cartItem=Cart.objects.all()
+
+  cart_serializer=cartSerializer(cartItem,many=True)  
+
+
+  context={'cartItem':cart_serializer.data}
+  return Response(context)
+
+
+
+
+
+
+
+
+
   
-
-
-  context={'cartItem':cartItem}
-  return render(request, 'products/cart.html', context)
-
-
-
-
 @login_required(login_url='login')
+@api_view(['GET'])
 def removeCart(request):
   id=request.GET.get('id')
   cart=Cart.objects.get(id=id)
@@ -194,6 +230,7 @@ def removeCart(request):
 
 
 @login_required(login_url='login')
+@api_view(['GET','POST'])
 def orderConfirmed(request):
   id=request.GET.get('id')
   product=products.objects.get(id=id)
@@ -230,20 +267,41 @@ def orderConfirmed(request):
 
 
 @login_required(login_url='login')
+@api_view(['GET','POST'])
 def profilePage(request):
   id=request.user.id
   user=User.objects.get(id=id)
+  user_serializer=userSeriliazer(user,many=False)
+
+
 
   try:
     details=userDetails.objects.get(user=request.user)
+    
+
   except userDetails.DoesNotExist:
     details=None
   
 
-  context={'user':user, 'details':details}
-  return render(request, 'products/profile.html',context)
+  details_serializer=userdetailsSerializer(details,many=False)
+
+  context={'user':user_serializer.data, 'details':details_serializer.data}
 
 
+
+  return Response(context)
+
+
+
+
+
+
+
+
+
+
+
+@api_view(['GET','POST','PUT'])
 def updateProfile(request):
 
   if request.method=='POST':
@@ -285,14 +343,9 @@ def updateProfile(request):
        )
       userdtls.save()
 
-   
-    
-    
-   
-    
 
-  return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
-
+      
+  return Response('updated')
 
 
 

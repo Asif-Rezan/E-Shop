@@ -25,10 +25,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-11ia$tjqnkcpacg+c@l^5@2bq0z!=c%8%udr4q+0$dp!(2*%ao'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['eshopingbd.herokuapp.com','127.0.0.1']
-#ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['eshopingbd.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'products'
+    'products',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
